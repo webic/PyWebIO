@@ -905,7 +905,7 @@ def put_scrollable(content, height=400, keep_bottom=False, horizon_scroll=False,
 
     .. versionchanged:: 1.1
        添加 ``height`` 参数，移除 ``max_height`` 参数；
-       添加 ``auto_scroll_bottom`` 参数
+       添加 ``keep_bottom`` 参数
     """
     if not isinstance(content, (list, tuple, OutputList)):
         content = [content]
