@@ -20,6 +20,9 @@ class ExportableCodeBlock(CodeBlock):
         return t.hexdigest()
 
     def run(self):
+        if self.env.app.builder.name == 'gettext':
+            return super().run()
+
         code_save_path = os.environ.get('CODE_EXPORT_PATH')
         caption = self.options.get('summary', '')
 
@@ -30,8 +33,11 @@ class ExportableCodeBlock(CodeBlock):
         if self.options.get('name', None) is None:
             # 设置name属性，从而让生成的代码html块具有id属性
             self.options.update({'name': 'demo-' + code_id})
+        else:
+            name = self.options.get('name', '')
+            self.options.update({'name': 'demo-' + name})
 
-        name = self.options.get('name').replace('_','-')
+        name = self.options.get('name').replace('_', '-')
         if name in type(self).names:
             name += '-' + code_id
             self.options.update({'name': name})
